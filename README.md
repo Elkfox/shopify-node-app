@@ -63,6 +63,8 @@ Routes can be found in the `routes/` folder in the root directory of the app.
 
 
 
+## Views
+Node Shopify App uses handlebars as it's template engine and any views can be located in `views/`
 
 
 
