@@ -1,24 +1,28 @@
 const express = require('express');
 const Shop = require('../models/Shop');
+const verifyOAuth = require('../helpers').verifyOAuth;
+const config = require('../config');
 
 const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  const shopUrl = req.query.shop;
-  console.log(req.query);
-  if (!shopUrl) {
-    return res.render('index', { title: 'Hello' });
+  const query = Object.keys(req.query).map((key) => `${key}=${req.query[key]}`).join('&');
+  if (req.query.shop) {
+    Shop.findOne({ shopify_domain: req.query.shop, isActive: true }, (err, shop) => {
+      if (!shop) {
+        return res.redirect(`/install/?${query}`);
+      }
+      if (verifyOAuth(req.query)) {
+        return res.render('app', { apiKey: config.SHOPIFY_API_KEY, appName: config.APP_NAME, shop });
+      }
+      return res.render('index', { title: req.query.shop });
+    });
+  } else {
+    return res.render('index', { title: 'Welcome to your example app' });
   }
-  const query = Shop.findOne({ shopify_domain: shopUrl }).exec();
-
-  query.then((err, shop) => {
-    if (err) {
-      return next(err);
-    } else if (shop === '' || shop === undefined) {
-      res.redirect('/install/');
-    }
-  });
 });
+
+router.get('/error', (req, res) => res.render('error', { message: 'Something went wrong!' }));
 
 module.exports = router;

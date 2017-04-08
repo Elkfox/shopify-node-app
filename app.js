@@ -1,16 +1,39 @@
 const express = require('express');
 const path = require('path');
-// const favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+// Routes
 const index = require('./routes/index');
-const users = require('./routes/users');
+const install = require('./routes/install');
+const webhooks = require('./routes/webhooks');
+const proxy = require('./routes/proxy');
+const api = require('./routes/api');
+
+// Models
+const Counter = require('./models/Counter');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/node-shopify-app');
 
 const app = express();
+
+// Initialise the counter if it hasn't been initialised yet.
+Counter.findById({ _id: 'storeId' }, (err, id) => {
+  if (id === null) {
+    const storeCount = new Counter({ _id: 'storeId' });
+    storeCount.save((error) => {
+      if (err) {
+        console.log('Error populating counter database: ', error);
+      }
+    });
+  } else if (err) {
+    console.log('Cannot find ID? ', err);
+  } else {
+    console.log('Database already populated');
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +48,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
-
+app.use('/install/', install);
+app.use('/webhook', webhooks);
+app.use('/proxy', proxy);
+app.use('/api', api);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
