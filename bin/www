@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('shopify-node-app:server');
 var http = require('http');
+require('dotenv').config({ path: '../.env' });
+var config = require('../config');
 
 /**
  * Get port from environment and store in Express.

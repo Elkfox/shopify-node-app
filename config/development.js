@@ -1,3 +1,3 @@
 module.exports = {
-  APP_URI: 'https://example-shopify-app.ngrok.io',
+  APP_URI: 'https://shopify-node-app.ngrok.io',
 };

@@ -4,11 +4,13 @@
  * to check if a request from a webhook is legitemate.
  */
 const express = require('express');
+const verifyWebhook = require('../middleware').verifyWebhook;
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.sendStatus(200);
+router.post('/', verifyWebhook, (req, res) => {
+  // This is where you should do something with your webhooks. Filter by Topic etc.
+  return res.sendStatus(200);
 });
 
 module.exports = router;

@@ -7,7 +7,8 @@ const config = {
   SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY || '',
   SHOPIFY_SHARED_SECRET: process.env.SHOPIFY_SHARED_SECRET || '',
   APP_NAME: 'Example App',
-  APP_SCOPE: 'read_products,write_products,write_script_tags,read_themes,write_themes',
+  APP_STORE_NAME: '',
+  APP_SCOPE: 'read_products,write_products,read_customers,write_customers',
 };
 
 if (env !== 'PRODUCTION') {

@@ -3,6 +3,7 @@ const Shop = require('../models/Shop');
 const Shopify = require('shopify-node-api');
 const config = require('../config');
 const generateNonce = require('../helpers').generateNonce;
+const buildWebhook = require('../helpers').buildWebhook;
 
 const router = express.Router();
 
@@ -50,14 +51,19 @@ router.get('/callback', (req, res) => {
         console.log(error);
         res.redirect('/error');
       }
-      shop.access_token = data.access_token;
+      console.log(data);
+      shop.accessToken = data.access_token;
       shop.isActive = true;
       shop.save((saveError) => {
-        if (error) {
+        if (saveError) {
           console.log('Cannot save shop: ', saveError);
           res.redirect('/error');
         }
-        res.redirect(`https://${shop.shopify_domain}/admin/apps`);
+        if (config.APP_STORE_NAME) {
+          res.redirect(`https://${shop.shopify_doman}/admin/apps/${config.APP_STORE_NAME}`);
+        } else {
+          res.redirect(`https://${shop.shopify_domain}/admin/apps`);
+        }
       });
     });
   });

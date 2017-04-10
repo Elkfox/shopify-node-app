@@ -8,10 +8,10 @@ const mongoose = require('mongoose');
 // Routes
 const index = require('./routes/index');
 const install = require('./routes/install');
-const webhooks = require('./routes/webhooks');
+const webhook = require('./routes/webhook');
 const proxy = require('./routes/proxy');
 const api = require('./routes/api');
-
+require('dotenv').config();
 // Models
 const Counter = require('./models/Counter');
 
@@ -47,10 +47,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
 app.use('/', index);
-app.use('/install/', install);
-app.use('/webhook', webhooks);
-app.use('/proxy', proxy);
+app.use('/install', install);
+app.use('/webhook', webhook);
+app.use('/proxy', proxy(__dirname));
 app.use('/api', api);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

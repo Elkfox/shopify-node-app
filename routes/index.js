@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
         return res.redirect(`/install/?${query}`);
       }
       if (verifyOAuth(req.query)) {
-        return res.render('app', { apiKey: config.SHOPIFY_API_KEY, appName: config.APP_NAME, shop });
+        return res.render('app/app', { apiKey: config.SHOPIFY_API_KEY, appName: config.APP_NAME, shop });
       }
       return res.render('index', { title: req.query.shop });
     });
