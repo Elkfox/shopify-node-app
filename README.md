@@ -69,6 +69,7 @@ There are two util commands available:
 
 ## Routes
 Routes can be found in the `routes/` folder in the root directory of the app.
+
 | File | Route | Description |
 | ---- | ----- | ----------- |
 | `index.js` | `/` | Front page end points |
