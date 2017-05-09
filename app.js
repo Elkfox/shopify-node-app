@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
-app.use('/proxy', proxy(__dirname));
+app.use('/proxy', proxy);
 app.use('/api', api);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
