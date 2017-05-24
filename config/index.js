@@ -9,6 +9,7 @@ const config = {
   APP_NAME: 'Example App',
   APP_STORE_NAME: '',
   APP_SCOPE: 'read_products,write_products,read_customers,write_customers',
+  DATABASE_NAME: 'shopify_node_app',
 };
 
 if (env !== 'PRODUCTION') {

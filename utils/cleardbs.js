@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Shop = require('../models/Shop');
 const Counter = require('../models/Counter');
+const config = require('../config');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/node-shopify-app');
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${config.DATABASE_NAME}`);
 
 Shop.remove({}, (error) => {
   if (error) {
@@ -18,6 +19,6 @@ Counter.remove({}, (error) => {
   } else {
     console.log('Successfully cleared Counter');
   }
-})
+});
 
 

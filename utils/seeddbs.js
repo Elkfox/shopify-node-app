@@ -3,8 +3,9 @@
 // But the same function runs when the app is first started as well.
 const mongoose = require('mongoose');
 const Counter = require('../models/Counter');
+const config = require('../config');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/node-shopify-app');
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${config.DATABASE_NAME}`);
 
 // Initialise the counter if it hasn't been initialised yet.
 Counter.remove({}, (error) => {

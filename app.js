@@ -14,8 +14,8 @@ const api = require('./routes/api');
 require('dotenv').config();
 // Models
 const Counter = require('./models/Counter');
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/node-shopify-app');
+const config = require('./config');
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${config.DATABASE_NAME}`);
 
 const app = express();
 
