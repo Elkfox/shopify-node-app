@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "allan",
+    "password": null,
+    "database": "shopify_node_app",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "shopify_node_app",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}

@@ -4,7 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 // Routes
 const index = require('./routes/index');
 const install = require('./routes/install');
@@ -13,9 +13,13 @@ const proxy = require('./routes/proxy');
 const api = require('./routes/api');
 require('dotenv').config();
 // Models
-const Counter = require('./models/Counter');
 const config = require('./config');
-mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${config.DATABASE_NAME}`);
+
+const sequelize = new Sequelize(process.env.DATABASE_URI || `postgres://allan@localhost:5432/${config.DATABASE_NAME}`);
+
+sequelize.authenticate()
+.then(() => console.log('Database connection established'))
+.catch(err => console.log('Error establishing database connection', err));
 
 const app = express();
 
