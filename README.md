@@ -3,6 +3,11 @@ Dummy Public App for Shopify built with Node
 Includes Embedded App SDK
 
 
+## Requirements
+ * node.js >= 6.11.0
+ * mongodb >= 3.2.9
+ * npm >= 5.0.0
+
 ## Install
 1. Fork and clone this repository.
 2. run `npm install`
