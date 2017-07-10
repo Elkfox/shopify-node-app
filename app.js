@@ -4,7 +4,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+
 // Routes
 const index = require('./routes/index');
 const install = require('./routes/install');
@@ -12,28 +15,8 @@ const webhook = require('./routes/webhook');
 const proxy = require('./routes/proxy');
 const api = require('./routes/api');
 require('dotenv').config();
-// Models
-const Counter = require('./models/Counter');
-const config = require('./config');
-mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${config.DATABASE_NAME}`);
 
 const app = express();
-
-// Initialise the counter if it hasn't been initialised yet.
-Counter.findById({ _id: 'storeId' }, (err, id) => {
-  if (id === null) {
-    const storeCount = new Counter({ _id: 'storeId' });
-    storeCount.save((error) => {
-      if (err) {
-        console.log('Error populating counter database: ', error);
-      }
-    });
-  } else if (err) {
-    console.log('Cannot find ID? ', err);
-  } else {
-    console.log('Database already populated');
-  }
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,13 +29,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('trust proxy', 1);
+app.use(session({
+  name: 'ShopifyNodeApp',
+  secret: process.env.SESSION_SECRET || 'coocoocachoo',
+  cookie: { secure: true, maxAge: (24 * 60 * 60 * 1000) },
+  saveUninitialized: true,
+  resave: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}));
 
+app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
 app.use('/proxy', proxy);
 app.use('/api', api);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

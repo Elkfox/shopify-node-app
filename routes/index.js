@@ -1,7 +1,9 @@
 const express = require('express');
-const Shop = require('../models/Shop');
 const verifyOAuth = require('../helpers').verifyOAuth;
+const mongoose = require('mongoose');
 const config = require('../config');
+
+const Shop = mongoose.model('Shop');
 
 const router = express.Router();
 
