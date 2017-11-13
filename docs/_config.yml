@@ -9,12 +9,19 @@ download_url: https://github.com/Elkfox/Shopify-Node-App/archive/master.zip
 # demo_url: https://concrete-theme.myshopify.com
 # Navigation =================================================================
 nav:
-  - title: About
-    url: '#about'
-  - title: Mongo Setup
-    url: '#mongo-setup'
-  - title: Ngrok
-    url: '#ngrok'
+  - title: 'Getting Started'
+    url: '#getting-started'
+    childlinks:
+    - title: About
+      url: '#about'
+    - title: Mongo Setup
+      url: '#mongo-setup'
+    - title: Ngrok
+      url: '#ngrok'
+    - title: Shopify Partner Dashboard
+      url: '#shopify-partner-dashboard'
+    - title: Configuration
+      url: '#configuration'
 
 # Collections ================================================================
 collections:

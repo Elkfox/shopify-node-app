@@ -10,7 +10,7 @@ First lets start by opening your terminal and checking to see if we have an inst
 mongod
 {% endhighlight %}
 
-If you do not have Mongo installed the command will not be found. If you do you can go ahead to the Ngrok section.
+If you do not have Mongo installed the command will not be found. If you do you can go ahead to the <a href="#ngrok">Ngrok</a> section.
 
 Getting started with Mongo is simple click [here to find the instructions for your operating system](https://docs.mongodb.com/manual/administration/install-community/)
 
