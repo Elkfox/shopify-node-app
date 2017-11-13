@@ -4,46 +4,16 @@ handle: "configuration"
 category: "configuration"
 ---
 
-If you haven't done so already fork and clone [the repository](https://github.com/Elkfox/shopify-node-app)
+Inside the `config/` directory there are three files
+- development.js - Development only configuration variables
+- index.js - Global configuration variables
+- production.js - Production only configuration variables
 
-And install all the required Node packages
+This is where you'll place any configuration variables you'll need or any references you'll need to environment variables later on.
+When the app is initalised it checks where `process.env.NODE_ENV` is set to production or not and will load the relevant configurations.
 
-{% highlight bash %}
-npm install
-{% endhighlight %}
-
-
-In the config directory we store the variables for the different environments. Production refers to the live environment and development is the local. index.js is the global variables with the current environment.
-
-Go into config/development.js and change the APP_URI to the your ngrok forwarding address. In my case it's https://32c49948.ngrok.io
-
-Now ensure that you have .env in your .gitignore because we will be storing sensitive information in this file such as our API secret. if it isn't add it now.
-
-Now create a new file in your app root called .env
-and add the API credentials we created earlier in the Shopify Partner Dashboard. It should look like this:
-
-{% highlight conf %}
-SHOPIFY_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-SHOPIFY_SHARED_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-{% endhighlight %}
-
-If you want to use port other than 7777 you can add that now too.
-
-{% highlight conf %}
-PORT=3000
-{% endhighlight %}
-
-Okay now lets get our app running!
-
-{% highlight bash %}
-npm start
-{% endhighlight %}
-
-You should now be able to install your app if you visit the installation url.
-
-My Shopify store url is `hello-world.myshopify.com`
-and my ngrok forwarding address is `https://32c49948.ngrok.io/``
-therefore my installation url is
-`https://32c49948.ngrok.io/?shop=hello-world`
-
-Congratulations 🙌
+Default configuration located in `config/index.js` variables are:
+- SHOPIFY\_API\_KEY - Your apps API Key. Generated when you set up the app and required to run and install the app
+- SHOPIFY\_SHARED\_SECRET - Your apps secret key. Generated when you set up the app and required to run and install the app.
+- APP_NAME - The name of your app. Can be left blank if you'd prefer to hardcode it in.
+- APP_SCOPE - The parts of the Shopify API your app will want access to. See [below](#scopes) for a list of possible scopes. This is required to install the app. You must have at least one scope permission.
