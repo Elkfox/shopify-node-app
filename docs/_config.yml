@@ -1,0 +1,30 @@
+# Meta =======================================================================
+title: Shopify Node App - A Shopify App framework built on Node Express and Mongo
+description: A Shopify App framework built on Node Express and Mongo. Includes Embedded app SDK and full tutorial.
+# Site =======================================================================
+name: Shopify Node App
+subtitle: A thousand hour headstart in building a Shopify Node App
+github_url: https://github.com/Elkfox/Shopify-Node-App
+download_url: https://github.com/Elkfox/Shopify-Node-App/archive/master.zip
+# demo_url: https://concrete-theme.myshopify.com
+# Navigation =================================================================
+nav:
+  - title: About
+    url: '#about'
+  - title: Mongo Setup
+    url: '#mongo-setup'
+  - title: Ngrok
+    url: '#ngrok'
+
+# Collections ================================================================
+collections:
+  documentation:
+    title: Documentation
+# Build settings =============================================================
+markdown: kramdown
+theme: minima
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock

@@ -13,7 +13,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 function start() {
-  /* You should require your models here so you don't have to initialise them all the time in 
+  /* You should require your models here so you don't have to initialise them all the time in
   different controlers*/
   require('./models/Shop');
 

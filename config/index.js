@@ -6,8 +6,8 @@ const development = require('./development');
 const config = {
   SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY || '',
   SHOPIFY_SHARED_SECRET: process.env.SHOPIFY_SHARED_SECRET || '',
-  APP_NAME: 'Example App',
-  APP_STORE_NAME: '',
+  APP_NAME: 'Customer',
+  APP_STORE_NAME: 'Customer',
   APP_SCOPE: 'read_products,write_products,read_customers,write_customers',
   DATABASE_NAME: 'shopify_node_app',
 };
