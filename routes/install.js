@@ -60,7 +60,7 @@ router.get('/callback', (req, res) => {
           res.redirect('/error');
         }
         if (config.APP_STORE_NAME) {
-          res.redirect(`https://${shop.shopify_doman}/admin/apps/${config.APP_STORE_NAME}`);
+          res.redirect(`https://${shop.shopify_domain}/admin/apps/${config.APP_STORE_NAME}`);
         } else {
           res.redirect(`https://${shop.shopify_domain}/admin/apps`);
         }
