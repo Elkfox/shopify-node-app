@@ -74,7 +74,7 @@ module.exports = {
     }
 
     const sharedSecret = config.SHOPIFY_SHARED_SECRET;
-    const calculatedSignature = crypto.createHmac('sha256', config.SHOPIFY_SHARED_SECRET)
+    const calculatedSignature = crypto.createHmac('sha256', sharedSecret)
       .update(Buffer.from(data), 'utf8')
       .digest('base64');
     return calculatedSignature === hmac;
