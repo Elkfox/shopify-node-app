@@ -15,7 +15,7 @@ function verifyWebhook(req, res, next) {
   let data;
   try {
     hmac = req.get('X-Shopify-Hmac-SHA256');
-    data = req.body;
+    data = req.rawbody;
   } catch (e) {
     console.log(`Webhook request failed from: ${req.get('X-Shopify-Shop-Domain')}`);
     res.sendStatus(200);
