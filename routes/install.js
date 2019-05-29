@@ -8,7 +8,7 @@ const buildWebhook = require('../helpers').buildWebhook;
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const shopName = `${req.query.shop}.myshopify.com`;
+  const shopName = req.query.shop;
   const nonce = generateNonce();
   const query = Shop.findOne({ shopify_domain: shopName }).exec();
   const shopAPI = new Shopify({
